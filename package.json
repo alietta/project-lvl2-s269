@@ -1,13 +1,13 @@
 {
   "name": "project_difference_calc",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Compares two configuration files and shows a difference.",
   "main": "index.js",
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "babel-node": "babel-node",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
     "prepublishOnly": "npm run build",
@@ -22,6 +22,9 @@
     "type": "git",
     "url": "git+https://github.com/alietta/project-lvl2-s269.git"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "author": "Tatiana Kudashova",
   "license": "ISC",
   "bugs": {
@@ -29,6 +32,7 @@
   },
   "homepage": "https://github.com/alietta/project-lvl2-s269#readme",
   "dependencies": {
+    "lodash": "*",
     "commander": "^2.15.1",
     "gulp": "^4.0.0"
   },
