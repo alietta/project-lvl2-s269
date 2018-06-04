@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/alietta/project-lvl2-s269#readme",
   "dependencies": {
+    "commander": "^2.15.1",
     "gulp": "^4.0.0"
   },
   "devDependencies": {

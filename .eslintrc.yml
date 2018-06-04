@@ -1,0 +1,30 @@
+---
+
+plugins:
+  - jest
+  - flowtype
+  - babel
+
+env:
+  node: true
+  jest: true
+
+parser: babel-eslint
+
+extends:
+  - 'airbnb-base'
+  - 'plugin:jest/recommended'
+  - 'plugin:flowtype/recommended'
+
+rules:
+  no-console: 0
+  no-useless-rename: [
+    'warn',
+     {
+       ignoreDestructuring: false,
+       ignoreImport: false,
+       ignoreExport: false,
+     },
+  ]
+  no-else-return: 0
+  no-confusing-arrow: 0
