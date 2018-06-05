@@ -1,0 +1,5 @@
+type: 'yaml'
+option2: 'string'
+option4: 'delete'
+set5: 'string6'
+check: false
