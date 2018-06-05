@@ -1,12 +1,15 @@
 import _ from 'lodash';
-import parseFile from './parseFile';
+import fs from 'fs';
+import path from 'path';
+import parse from './parseFunction';
 
 const nodeToString = {
-  stable: ({ key, before }) => `\n   ${key}: ${before}`,
-  update: ({ key, before, after }) => `\n + ${key}: ${after}\n - ${key}: ${before}`,
-  delete: ({ key, before }) => `\n - ${key}: ${before}`,
-  insert: ({ key, after }) => `\n + ${key}: ${after}`,
+  unchanged: ({ key, before }) => `\n   ${key}: ${before}`,
+  updated: ({ key, before, after }) => `\n + ${key}: ${after}\n - ${key}: ${before}`,
+  deleted: ({ key, before }) => `\n - ${key}: ${before}`,
+  inserted: ({ key, after }) => `\n + ${key}: ${after}`,
 };
+const parseFile = filePath => parse(path.extname(filePath))(fs.readFileSync(filePath, 'utf8'));
 
 export default (beforePath, afterPath) => {
   const before = parseFile(beforePath);
@@ -18,16 +21,16 @@ export default (beforePath, afterPath) => {
     if (_.has(before, key)) {
       if (_.has(after, key)) {
         if (before[key] === after[key]) {
-          return [...acc, { type: 'stable', diff: { key, before: before[key] } }];
+          return [...acc, { type: 'unchanged', diff: { key, before: before[key] } }];
         }
         return [...acc,
           {
-            type: 'update', diff: { key, after: after[key], before: before[key] },
+            type: 'updated', diff: { key, after: after[key], before: before[key] },
           }];
       }
-      return [...acc, { type: 'delete', diff: { key, before: before[key] } }];
+      return [...acc, { type: 'deleted', diff: { key, before: before[key] } }];
     }
-    return [...acc, { type: 'insert', diff: { key, after: after[key] } }];
+    return [...acc, { type: 'inserted', diff: { key, after: after[key] } }];
   }, []);
   const stringResult = result.reduce((acc, r) => `${acc}${nodeToString[r.type](r.diff)}`, '');
   return `{${stringResult}\n}\n`;
