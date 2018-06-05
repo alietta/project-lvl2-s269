@@ -1,0 +1,5 @@
+type: 'yaml'
+option1: 356
+option2: 'string'
+set5: 'string6'
+check: true

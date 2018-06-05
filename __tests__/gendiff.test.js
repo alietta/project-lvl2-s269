@@ -4,10 +4,18 @@ import genDiff from '../src';
 
 const getFixturePath = fileName => path.join(__dirname, '__fixtures__', fileName);
 
-test('difference', () => {
+test('difference json', () => {
   const beforePath = getFixturePath('before.json');
   const afterPath = getFixturePath('after.json');
   const diffPath = getFixturePath('diff.txt');
+  const expected = fs.readFileSync(diffPath, 'utf-8');
+  expect(genDiff(beforePath, afterPath)).toBe(expected);
+});
+
+test('difference yaml', () => {
+  const beforePath = getFixturePath('before.yaml');
+  const afterPath = getFixturePath('after.yaml');
+  const diffPath = getFixturePath('diffYaml.txt');
   const expected = fs.readFileSync(diffPath, 'utf-8');
   expect(genDiff(beforePath, afterPath)).toBe(expected);
 });

@@ -1,5 +1,5 @@
-import fs from 'fs';
 import _ from 'lodash';
+import parseFile from './parseFile';
 
 const nodeToString = {
   stable: ({ key, before }) => `\n   ${key}: ${before}`,
@@ -9,8 +9,8 @@ const nodeToString = {
 };
 
 export default (beforePath, afterPath) => {
-  const before = JSON.parse(fs.readFileSync(beforePath, 'utf8'));
-  const after = JSON.parse(fs.readFileSync(afterPath, 'utf8'));
+  const before = parseFile(beforePath);
+  const after = parseFile(afterPath);
   const keysBefore = _.keys(before);
   const keysAfter = _.keys(after);
   const keys = keysBefore.concat(_.difference(keysAfter, keysBefore));
