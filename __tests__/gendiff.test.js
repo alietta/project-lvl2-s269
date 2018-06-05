@@ -19,3 +19,11 @@ test('difference yaml', () => {
   const expected = fs.readFileSync(diffPath, 'utf-8');
   expect(genDiff(beforePath, afterPath)).toBe(expected);
 });
+
+test('difference ini', () => {
+  const beforePath = getFixturePath('before.ini');
+  const afterPath = getFixturePath('after.ini');
+  const diffPath = getFixturePath('diffIni.txt');
+  const expected = fs.readFileSync(diffPath, 'utf-8');
+  expect(genDiff(beforePath, afterPath)).toBe(expected);
+});
