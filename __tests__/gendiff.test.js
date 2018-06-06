@@ -12,6 +12,14 @@ test('difference json', () => {
   expect(genDiff(beforePath, afterPath)).toBe(expected);
 });
 
+test('difference json2', () => {
+  const beforePath = getFixturePath('beforeJSON2.json');
+  const afterPath = getFixturePath('afterJSON2.json');
+  const diffPath = getFixturePath('diffJSON2.txt');
+  const expected = fs.readFileSync(diffPath, 'utf-8');
+  expect(genDiff(beforePath, afterPath)).toBe(expected);
+});
+
 test('difference yaml', () => {
   const beforePath = getFixturePath('before.yaml');
   const afterPath = getFixturePath('after.yaml');
