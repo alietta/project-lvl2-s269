@@ -43,3 +43,11 @@ test('difference ini', () => {
   const expected = fs.readFileSync(diffPath, 'utf-8');
   expect(genDiff(beforePath, afterPath)).toBe(expected);
 });
+
+test('difference ini2', () => {
+  const beforePath = getFixturePath('beforeINI2.ini');
+  const afterPath = getFixturePath('afterINI2.ini');
+  const diffPath = getFixturePath('diffLevel.txt');
+  const expected = fs.readFileSync(diffPath, 'utf-8');
+  expect(genDiff(beforePath, afterPath)).toBe(expected);
+});
