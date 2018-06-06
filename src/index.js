@@ -19,28 +19,20 @@ const stringify = (body, level) => {
   return body;
 };
 
+const getNewKey = (key, level, mode = ' ') => `${getPadding(level)}  ${mode} ${key}`;
 const nodeToString = {
-  unchanged: ({ key, before }, level) => `${getPadding(level)}    ${key}: ${stringify(before, level + 1)}`,
+  unchanged: ({ key, before }, level) => `${getNewKey(key, level)}: ${stringify(before, level + 1)}`,
   updated: ({ key, before, after }, level) => [
-    `${getPadding(level)}  + ${key}: ${stringify(after, level + 1)}`,
-    `${getPadding(level)}  - ${key}: ${stringify(before, level + 1)}`,
+    `${getNewKey(key, level, '+')}: ${stringify(after, level + 1)}`,
+    `${getNewKey(key, level, '-')}: ${stringify(before, level + 1)}`,
   ],
-  deleted: ({ key, before }, level) => `${getPadding(level)}  - ${key}: ${stringify(before, level + 1)}`,
-  inserted: ({ key, after }, level) => `${getPadding(level)}  + ${key}: ${stringify(after, level + 1)}`,
-  // children: ({ diff }, render) => render(diff),
-  children: ({ key, children }, level, render) => {
-    // console.log('diff in children ', children);
-    return `${getPadding(level)}    ${key}: ${render(children, level + 1)}`;
-  },
+  deleted: ({ key, before }, level) => `${getNewKey(key, level, '-')}: ${stringify(before, level + 1)}`,
+  inserted: ({ key, after }, level) => `${getNewKey(key, level, '+')}: ${stringify(after, level + 1)}`,
+  children: ({ key, children }, level, render) => `${getNewKey(key, level)}: ${render(children, level + 1)}`,
 };
 
 const render = (data, level = 0) => {
-  // console.log(data);
-  // const stringResult = _.flatten(data.map(d => nodeToString[d.type](d.diff, render)));
-  const stringResult = _.flatten(data.map((d) => {
-    // console.log(d);
-    return nodeToString[d.type](d, level, render);
-  }));
+  const stringResult = _.flatten(data.map(d => nodeToString[d.type](d, level, render)));
   return ['{', ...stringResult, `${getPadding(level)}}`].join('\n');
 };
 
