@@ -1,23 +1,31 @@
 import _ from 'lodash';
+import { ChildrenNode, UnchangedNode, UpdatedNode, DeletedNode, AddedNode } from './nodes';
 
-const buildAST = (before, after) => {
-  const keys = _.union(_.keys(before), _.keys(after));
-  return keys.map((key) => {
-    if (_.has(before, key)) {
-      if (_.has(after, key)) {
-        if (after[key] instanceof Object && before[key] instanceof Object) {
-          return { type: 'children', key, children: buildAST(before[key], after[key]) };
-        } else if (before[key] === after[key]) {
-          return { type: 'unchanged', key, before: before[key] };
+class ASTBulder {
+  constructor(before, after) {
+    this.before = before;
+    this.after = after;
+  }
+  getKeys() {
+    return _.union(_.keys(this.before), _.keys(this.after));
+  }
+  build() {
+    const keys = this.getKeys();
+    return keys.map((key) => {
+      if (_.has(this.before, key)) {
+        if (_.has(this.after, key)) {
+          if (this.after[key] instanceof Object && this.before[key] instanceof Object) {
+            const newASTBuilder = new ASTBulder(this.before[key], this.after[key]);
+            return new ChildrenNode(key, newASTBuilder.build());
+          } else if (this.before[key] === this.after[key]) {
+            return new UnchangedNode(key, this.before[key]);
+          }
+          return new UpdatedNode(key, this.before[key], this.after[key]);
         }
-        return {
-          type: 'updated', key, after: after[key], before: before[key],
-        };
+        return new DeletedNode(key, this.before[key]);
       }
-      return { type: 'deleted', key, before: before[key] };
-    }
-    return { type: 'inserted', key, after: after[key] };
-  }, []);
-};
-
-export default buildAST;
+      return new AddedNode(key, this.after[key]);
+    }, []);
+  }
+}
+export default ASTBulder;

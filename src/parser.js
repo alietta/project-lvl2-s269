@@ -1,17 +1,11 @@
 import ini from 'ini';
 import { safeLoad } from 'js-yaml';
 import fs from 'fs';
-// const parsers = {
-//   '.json': JSON.parse,
-//   '.yaml': safeLoad,
-//   '.ini': ini.parse,
-// };
+
 class JSONParser {
   constructor() {
     this.type = '.json';
     this.parse = JSON.parse;
-    console.log('----------');
-    console.log(this.parse);
   }
 }
 class YAMLParser {
@@ -44,17 +38,9 @@ export class Parser {
 }
 export class FileParser {
   constructor(parser) {
-    console.log(parser);
     this.parser = parser;
   }
   parse(filePath) {
     return this.parser.parse(fs.readFileSync(filePath, 'utf8'));
   }
 }
-// export default format => (data) => {
-//   const parse = parsers[format];
-//   if (!parse) {
-//     throw new Error(`unkown format: ${format}`);
-//   }
-//   return parse(data);
-// };
