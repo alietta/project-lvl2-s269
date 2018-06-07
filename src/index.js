@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
-import parse from './parser';
+import { Parser, FileParser } from './parser';
 import build from './builder';
 
 
-const parseFile = filePath => parse(path.extname(filePath))(fs.readFileSync(filePath, 'utf8'));
+// const parseFile = filePath => parse(path.extname(filePath))(fs.readFileSync(filePath, 'utf8'));
 
 const getPadding = level => ' '.repeat(level * 4);
 
@@ -37,8 +37,10 @@ const render = (data, level = 0) => {
 };
 
 export default (beforePath, afterPath) => {
-  const before = parseFile(beforePath);
-  const after = parseFile(afterPath);
+  const parser = new Parser(path.extname(beforePath));
+  const fileParser = new FileParser(parser.getParser());
+  const before = fileParser.parse(beforePath);
+  const after = fileParser.parse(afterPath);
   const result = build(before, after);
   return `${render(result)}\n`;
 };
