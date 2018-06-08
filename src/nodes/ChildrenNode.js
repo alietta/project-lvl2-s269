@@ -1,11 +1,10 @@
-import Node from './Nodes';
-
-export default class ChildrenNode extends Node {
+export default class ChildrenNode {
   constructor(key, children) {
-    super(key);
+    this.key = key;
     this.children = children;
+    this.mode = ' ';
   }
-  toString(level, render) {
-    return `${this.getNewKey(level)}: ${render(this.children, level + 1)}`;
+  getPlainText() {
+    return this.mode;
   }
 }

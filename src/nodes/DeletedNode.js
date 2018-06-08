@@ -1,11 +1,9 @@
-import Node from './Nodes';
-
-export default class DeletedNode extends Node {
+export default class DeletedNode {
   constructor(key, value) {
-    super(key);
+    this.key = key;
     this.value = value;
+    this.mode = '-';
+    this.children = null;
   }
-  toString(level) {
-    return `${this.getNewKey(level, '-')}: ${this.stringify(this.value, level + 1)}`;
-  }
+  getPlainText = key => `Property '${key}' was added removed`;
 }

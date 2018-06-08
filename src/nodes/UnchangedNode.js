@@ -1,11 +1,9 @@
-import Node from './Nodes';
-
-export default class UnchangedNode extends Node {
+export default class UnchangedNode {
   constructor(key, value) {
-    super(key);
+    this.key = key;
     this.value = value;
+    this.mode = ' ';
+    this.children = null;
   }
-  toString(level) {
-    return `${this.getNewKey(level)}: ${this.stringify(this.value, level + 1)}`;
-  }
+  getPlainText = key => `Property '${key}' was unchanged`;
 }

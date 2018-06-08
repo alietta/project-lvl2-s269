@@ -1,11 +1,11 @@
-import Node from './Nodes';
-
-export default class AddedNode extends Node {
+export default class AddedNode {
   constructor(key, value) {
-    super(key);
+    this.key = key;
     this.value = value;
+    this.mode = '+';
+    this.children = null;
   }
-  toString(level) {
-    return `${this.getNewKey(level, '+')}: ${this.stringify(this.value, level + 1)}`;
+  getPlainText(key, getTextValue) {
+    return `Property '${key}' was added with ${getTextValue(this.value)}`;
   }
 }

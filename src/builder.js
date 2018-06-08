@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import ChildrenNode from './nodes/ChildrenNode';
 import UnchangedNode from './nodes/UnchangedNode';
-import UpdatedNode from './nodes/UpdatedNode';
+// import UpdatedNode from './nodes/UpdatedNode';
 import DeletedNode from './nodes/DeletedNode';
 import AddedNode from './nodes/AddedNode';
 
@@ -24,7 +24,8 @@ class ASTBulder {
           } else if (this.before[key] === this.after[key]) {
             return new UnchangedNode(key, this.before[key]);
           }
-          return new UpdatedNode(key, this.before[key], this.after[key]);
+          // return new UpdatedNode(key, this.before[key], this.after[key]);
+          return [new AddedNode(key, this.after[key]), new DeletedNode(key, this.before[key])];
         }
         return new DeletedNode(key, this.before[key]);
       }

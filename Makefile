@@ -3,7 +3,7 @@ install: ;@echo "Installing ${PROJECT}....."; \
 publish:
 	npm publish
 start:
-	npm run babel-node -- src/bin/gendiff.js 
+	npm run babel-node -- src/bin/gendiff.js
 lint:
 	npm run eslint .
 test:
