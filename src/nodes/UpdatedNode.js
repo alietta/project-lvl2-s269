@@ -1,4 +1,4 @@
-import Node from './nodes';
+import Node from './Nodes';
 
 export default class UpdatedNode extends Node {
   constructor(key, first, second) {

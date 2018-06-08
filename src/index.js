@@ -1,6 +1,7 @@
 import _ from 'lodash';
+import fs from 'fs';
 import path from 'path';
-import Parser from './parser/parser';
+import getParser from './parsers';
 import ASTBulder from './builder';
 
 const render = (data, level = 0) => {
@@ -9,9 +10,10 @@ const render = (data, level = 0) => {
 };
 
 export default (beforePath, afterPath) => {
-  const parser = new Parser(path.extname(beforePath));
-  const before = parser.parseFile(beforePath);
-  const after = parser.parseFile(afterPath);
+  const format = path.extname(beforePath);
+  const parser = getParser(format);
+  const before = parser.parse(fs.readFileSync(beforePath, 'utf8'));
+  const after = parser.parse(fs.readFileSync(afterPath, 'utf8'));
   const builder = new ASTBulder(before, after);
   const result = builder.build();
   return `${render(result)}\n`;

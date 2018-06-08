@@ -1,8 +1,8 @@
 import ini from 'ini';
 
-export default class INIParser {
+export default class IniParser {
   constructor() {
     this.type = '.yaml';
-    this.parse = ini.parse;
   }
+  parse = text => ini.parse(text);
 }

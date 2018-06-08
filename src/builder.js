@@ -1,9 +1,9 @@
 import _ from 'lodash';
-import ChildrenNode from './nodes/сhildrenNode';
-import UnchangedNode from './nodes/unchangedNode';
-import UpdatedNode from './nodes/updatedNode';
-import DeletedNode from './nodes/deletedNode';
-import AddedNode from './nodes/addedNode';
+import ChildrenNode from './nodes/ChildrenNode';
+import UnchangedNode from './nodes/UnchangedNode';
+import UpdatedNode from './nodes/UpdatedNode';
+import DeletedNode from './nodes/DeletedNode';
+import AddedNode from './nodes/AddedNode';
 
 class ASTBulder {
   constructor(before, after) {
