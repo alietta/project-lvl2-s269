@@ -1,36 +1,33 @@
 import _ from 'lodash';
-import ChildrenNode from './nodes/ChildrenNode';
-import UnchangedNode from './nodes/UnchangedNode';
-// import UpdatedNode from './nodes/UpdatedNode';
-import DeletedNode from './nodes/DeletedNode';
-import AddedNode from './nodes/AddedNode';
+import { ChildrenNode, UnchangedNode, DeletedNode, AddedNode } from './nodes';
 
-class ASTBulder {
-  constructor(before, after) {
-    this.before = before;
-    this.after = after;
+class DiffBulder {
+  constructor(firstValue, secondValue) {
+    this.firstValue = firstValue;
+    this.secondValue = secondValue;
   }
   getKeys() {
-    return _.union(_.keys(this.before), _.keys(this.after));
+    return _.union(_.keys(this.firstValue), _.keys(this.secondValue));
   }
-  build() {
+  buildAST() {
     const keys = this.getKeys();
     return keys.map((key) => {
-      if (_.has(this.before, key)) {
-        if (_.has(this.after, key)) {
-          if (this.after[key] instanceof Object && this.before[key] instanceof Object) {
-            const newASTBuilder = new ASTBulder(this.before[key], this.after[key]);
-            return new ChildrenNode(key, newASTBuilder.build());
-          } else if (this.before[key] === this.after[key]) {
-            return new UnchangedNode(key, this.before[key]);
+      if (_.has(this.firstValue, key)) {
+        if (_.has(this.secondValue, key)) {
+          if (this.secondValue[key] instanceof Object && this.firstValue[key] instanceof Object) {
+            const newASTBuilder = new DiffBulder(this.firstValue[key], this.secondValue[key]);
+            return new ChildrenNode(key, newASTBuilder.buildAST());
+          } else if (this.firstValue[key] === this.secondValue[key]) {
+            return new UnchangedNode(key, this.firstValue[key]);
           }
-          // return new UpdatedNode(key, this.before[key], this.after[key]);
-          return [new AddedNode(key, this.after[key]), new DeletedNode(key, this.before[key])];
+          return [new AddedNode(key, this.secondValue[key]),
+            new DeletedNode(key, this.firstValue[key]),
+          ];
         }
-        return new DeletedNode(key, this.before[key]);
+        return new DeletedNode(key, this.firstValue[key]);
       }
-      return new AddedNode(key, this.after[key]);
+      return new AddedNode(key, this.secondValue[key]);
     }, []);
   }
 }
-export default ASTBulder;
+export default DiffBulder;

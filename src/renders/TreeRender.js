@@ -28,6 +28,6 @@ export default class TreeRender {
     }
     return body;
   };
-  getNewKey = data => `${this.getPadding(this.level)}  ${data.mode} ${data.key}`;
+  getNewKey = data => `${this.getPadding(this.level)}  ${data.getMode()} ${data.key}`;
   getString = data => `${this.getNewKey(data)}: ${this.stringify(data.value, this.level + 1)}`
 }
