@@ -1,5 +1,5 @@
 Property 'common.setting1' was unchanged
-Property 'common.setting2' was added removed
+Property 'common.setting2' was removed
 Property 'common.setting3' was updated. From 'complex value' to 'true'
 Property 'common.setting6.key' was unchanged
 Property 'common.setting6.ops' was added with vops
@@ -8,5 +8,5 @@ Property 'common.setting5' was added with complex value
 Property 'group1.baz' was updated. From 'bars' to 'bas'
 Property 'group1.foo' was unchanged
 Property 'group1.nest' was updated. From 'str' to 'complex value'
-Property 'group2' was added removed
+Property 'group2' was removed
 Property 'group3' was added with complex value

@@ -4,6 +4,4 @@ export default class UnchangedNode {
     this.value = value;
     this.children = null;
   }
-  getPlainText = key => `Property '${key}' was unchanged`;
-  getMode = () => ' ';
 }

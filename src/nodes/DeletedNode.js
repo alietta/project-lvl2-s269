@@ -4,6 +4,4 @@ export default class DeletedNode {
     this.value = value;
     this.children = null;
   }
-  getPlainText = key => `Property '${key}' was added removed`;
-  getMode = () => '-';
 }

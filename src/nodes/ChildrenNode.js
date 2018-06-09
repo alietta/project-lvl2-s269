@@ -3,8 +3,4 @@ export default class ChildrenNode {
     this.key = key;
     this.children = children;
   }
-  getPlainText() {
-    return this.mode;
-  }
-  getMode = () => ' ';
 }

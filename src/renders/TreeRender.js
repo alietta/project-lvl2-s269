@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { DeletedNode, AddedNode } from '../nodes';
 
 export default class TreeRender {
   constructor(data, level = 0) {
@@ -28,6 +29,16 @@ export default class TreeRender {
     }
     return body;
   };
-  getNewKey = data => `${this.getPadding(this.level)}  ${data.getMode()} ${data.key}`;
+  getNewKey = (data) => {
+    let mode;
+    if (data instanceof AddedNode) {
+      mode = '+';
+    } else if (data instanceof DeletedNode) {
+      mode = '-';
+    } else {
+      mode = ' ';
+    }
+    return `${this.getPadding(this.level)}  ${mode} ${data.key}`;
+  };
   getString = data => `${this.getNewKey(data)}: ${this.stringify(data.value, this.level + 1)}`
 }
