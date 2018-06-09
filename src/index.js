@@ -11,6 +11,6 @@ export default (beforePath, afterPath, format = 'tree') => {
   const after = parser.parse(fs.readFileSync(afterPath, 'utf8'));
   const builder = new DiffBulder(before, after);
   const result = builder.buildAST();
-  const resultRender = getRender(format, result);
-  return `${resultRender.render()}\n`;
+  const resultRender = getRender(format);
+  return `${resultRender.render(result)}\n`;
 };

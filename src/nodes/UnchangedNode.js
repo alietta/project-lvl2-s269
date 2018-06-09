@@ -1,7 +1,6 @@
 export default class UnchangedNode {
-  constructor(key, value) {
+  constructor(key, oldValue) {
     this.key = key;
-    this.value = value;
-    this.children = null;
+    this.oldValue = oldValue;
   }
 }

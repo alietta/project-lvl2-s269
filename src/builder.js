@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { ChildrenNode, UnchangedNode, DeletedNode, AddedNode } from './nodes';
+import { ChildrenNode, UnchangedNode, UpdatedNode, DeletedNode, AddedNode } from './nodes';
 
 class DiffBulder {
   constructor(firstValue, secondValue) {
@@ -20,9 +20,7 @@ class DiffBulder {
           } else if (this.firstValue[key] === this.secondValue[key]) {
             return new UnchangedNode(key, this.firstValue[key]);
           }
-          return [new AddedNode(key, this.secondValue[key]),
-            new DeletedNode(key, this.firstValue[key]),
-          ];
+          return new UpdatedNode(key, this.firstValue[key], this.secondValue[key]);
         }
         return new DeletedNode(key, this.firstValue[key]);
       }

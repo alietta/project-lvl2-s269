@@ -1,7 +1,6 @@
 export default class AddedNode {
-  constructor(key, value) {
+  constructor(key, newValue) {
     this.key = key;
-    this.value = value;
-    this.children = null;
+    this.newValue = newValue;
   }
 }
