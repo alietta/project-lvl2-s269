@@ -9,7 +9,7 @@ test('difference json', () => {
   const afterPath = getFixturePath('after.json');
   const diffPath = getFixturePath('diff.txt');
   const expected = fs.readFileSync(diffPath, 'utf-8');
-  expect(genDiff(beforePath, afterPath)).toBe(expected);
+  expect(`${genDiff(beforePath, afterPath)}\n`).toBe(expected);
 });
 
 test('difference json2', () => {
@@ -17,7 +17,7 @@ test('difference json2', () => {
   const afterPath = getFixturePath('afterJSON2.json');
   const diffPath = getFixturePath('diffLevel.txt');
   const expected = fs.readFileSync(diffPath, 'utf-8');
-  expect(genDiff(beforePath, afterPath)).toBe(expected);
+  expect(`${genDiff(beforePath, afterPath)}\n`).toBe(expected);
 });
 
 test('difference yaml', () => {
@@ -25,7 +25,7 @@ test('difference yaml', () => {
   const afterPath = getFixturePath('after.yaml');
   const diffPath = getFixturePath('diffYaml.txt');
   const expected = fs.readFileSync(diffPath, 'utf-8');
-  expect(genDiff(beforePath, afterPath)).toBe(expected);
+  expect(`${genDiff(beforePath, afterPath)}\n`).toBe(expected);
 });
 
 test('difference yaml2', () => {
@@ -33,7 +33,7 @@ test('difference yaml2', () => {
   const afterPath = getFixturePath('afterYAML2.yaml');
   const diffPath = getFixturePath('diffLevel.txt');
   const expected = fs.readFileSync(diffPath, 'utf-8');
-  expect(genDiff(beforePath, afterPath)).toBe(expected);
+  expect(`${genDiff(beforePath, afterPath)}\n`).toBe(expected);
 });
 
 test('difference ini', () => {
@@ -41,7 +41,7 @@ test('difference ini', () => {
   const afterPath = getFixturePath('after.ini');
   const diffPath = getFixturePath('diffIni.txt');
   const expected = fs.readFileSync(diffPath, 'utf-8');
-  expect(genDiff(beforePath, afterPath)).toBe(expected);
+  expect(`${genDiff(beforePath, afterPath)}\n`).toBe(expected);
 });
 
 test('difference ini2', () => {
@@ -49,7 +49,7 @@ test('difference ini2', () => {
   const afterPath = getFixturePath('afterINI2.ini');
   const diffPath = getFixturePath('diffLevel.txt');
   const expected = fs.readFileSync(diffPath, 'utf-8');
-  expect(genDiff(beforePath, afterPath)).toBe(expected);
+  expect(`${genDiff(beforePath, afterPath)}\n`).toBe(expected);
 });
 
 test('difference json plain', () => {
@@ -57,7 +57,7 @@ test('difference json plain', () => {
   const afterPath = getFixturePath('afterJSON2.json');
   const diffPath = getFixturePath('diffPlain.txt');
   const expected = fs.readFileSync(diffPath, 'utf-8');
-  expect(genDiff(beforePath, afterPath, 'plain')).toBe(expected);
+  expect(`${genDiff(beforePath, afterPath, 'plain')}\n`).toBe(expected);
 });
 
 test('difference yaml plain', () => {
@@ -65,7 +65,7 @@ test('difference yaml plain', () => {
   const afterPath = getFixturePath('afterYAML2.yaml');
   const diffPath = getFixturePath('diffPlain.txt');
   const expected = fs.readFileSync(diffPath, 'utf-8');
-  expect(genDiff(beforePath, afterPath, 'plain')).toBe(expected);
+  expect(`${genDiff(beforePath, afterPath, 'plain')}\n`).toBe(expected);
 });
 
 test('difference ini plain', () => {
@@ -73,7 +73,7 @@ test('difference ini plain', () => {
   const afterPath = getFixturePath('afterINI2.ini');
   const diffPath = getFixturePath('diffPlain.txt');
   const expected = fs.readFileSync(diffPath, 'utf-8');
-  expect(genDiff(beforePath, afterPath, 'plain')).toBe(expected);
+  expect(`${genDiff(beforePath, afterPath, 'plain')}\n`).toBe(expected);
 });
 
 test('difference json json', () => {
@@ -81,7 +81,7 @@ test('difference json json', () => {
   const afterPath = getFixturePath('afterJSON2.json');
   const diffPath = getFixturePath('diffJSON.json');
   const diff = JSON.parse(fs.readFileSync(diffPath, 'utf-8'));
-  const expected = `${JSON.stringify(diff, null, ' ')}\n`;
+  const expected = JSON.stringify(diff, null, ' ');
   expect(genDiff(beforePath, afterPath, 'json')).toBe(expected);
 });
 
@@ -90,7 +90,7 @@ test('difference yaml json', () => {
   const afterPath = getFixturePath('afterYAML2.yaml');
   const diffPath = getFixturePath('diffJSON.json');
   const diff = JSON.parse(fs.readFileSync(diffPath, 'utf-8'));
-  const expected = `${JSON.stringify(diff, null, ' ')}\n`;
+  const expected = JSON.stringify(diff, null, ' ');
   expect(genDiff(beforePath, afterPath, 'json')).toBe(expected);
 });
 
@@ -99,6 +99,6 @@ test('difference ini json', () => {
   const afterPath = getFixturePath('afterINI2.ini');
   const diffPath = getFixturePath('diffJSON.json');
   const diff = JSON.parse(fs.readFileSync(diffPath, 'utf-8'));
-  const expected = `${JSON.stringify(diff, null, ' ')}\n`;
+  const expected = JSON.stringify(diff, null, ' ');
   expect(genDiff(beforePath, afterPath, 'json')).toBe(expected);
 });
