@@ -1,84 +1,84 @@
 {
- "common": {
-  "children": [
-    {
-      "setting1": {
-        "oldValue": "Value 1"
-      }
-    },
-    {
-      "setting2": {
-        "oldValue": "200"
-      }
-    },
-    {
-      "setting3": {
-        "oldValue": true,
-        "newValue": {
-          "key": "value"
+  "common": {
+    "children": [
+      {
+        "setting1": {
+          "unchangedValue": "Value 1"
         }
-      }
-    },
-    {
-      "setting6": {
-        "children": [
-          {
-            "key": {
-              "oldValue": "value"
-            }
+      },
+      {
+        "setting2": {
+          "deletedValue": "200"
+        }
+      },
+      {
+        "setting3": {
+          "addedValue": {
+            "key": "value"
           },
-          {
-            "ops": {
-              "newValue": "vops"
+          "deletedValue": true
+        }
+      },
+      {
+        "setting6": {
+          "children": [
+            {
+              "key": {
+                "unchangedValue": "value"
+              }
+            },
+            {
+              "ops": {
+                "addedValue": "vops"
+              }
             }
+          ]
+        }
+      },
+      {
+        "setting4": {
+          "addedValue": "blah blah"
+        }
+      },
+      {
+        "setting5": {
+          "addedValue": {
+            "key5": "value5"
           }
-        ]
-      }
-    },
-    {
-      "setting4": {
-        "newValue": "blah blah"
-      }
-    },
-    {
-      "setting5": {
-        "newValue": {
-          "key5": "value5"
         }
       }
-    }
     ]
   },
   "group1": {
     "children": [
       {
         "baz": {
-          "oldValue": "bas",
-          "newValue": "bars"
+          "addedValue": "bars",
+          "deletedValue": "bas"
         }
       },
       {
         "foo": {
-          "oldValue": "bar"
+          "unchangedValue": "bar"
         }
       },
       {
         "nest": {
-          "oldValue": {
+          "addedValue": "str",
+          "deletedValue": {
             "key": "value"
-          },
-          "newValue": "str"
+          }
         }
       }
     ]
   },
   "group2": {
-    "oldValue": {
+    "deletedValue": {
       "abc": "12345"
     }
   },
   "group3": {
-    "newValue": {
+    "addedValue": {
       "fee": "100500"
     }
   }
