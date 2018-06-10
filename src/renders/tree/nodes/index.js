@@ -5,23 +5,15 @@ import TreeDeletedNode from './TreeDeletedNode';
 import TreeAddedNode from './TreeAddedNode';
 
 const treeNodes = {
-  children: TreeChildrenNode,
-  unchanged: TreeUnchangedNode,
-  updated: TreeUpdatedNode,
-  deleted: TreeDeletedNode,
-  added: TreeAddedNode,
+  ChildrenNode: TreeChildrenNode,
+  UnchangedNode: TreeUnchangedNode,
+  UpdatedNode: TreeUpdatedNode,
+  DeletedNode: TreeDeletedNode,
+  AddedNode: TreeAddedNode,
 };
-const getType = (node) => {
-  if (typeof node === 'undefined') {
-    return 'undefined';
-  } else if (node === null) {
-    return 'null';
-  }
-  const className = node.constructor.name;
-  return className.substring(0, className.length - 4).toLowerCase();
-};
+
 export default (node) => {
-  const type = getType(node);
+  const type = node.constructor.name;
   const TreeNode = treeNodes[type];
   if (!TreeNode) {
     throw new Error(`unkown format: ${type}`);
