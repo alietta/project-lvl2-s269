@@ -1,14 +1,10 @@
-export default class TreeUpdatedNode {
-  constructor(updatedNode) {
-    this.updatedNode = updatedNode;
-  }
-  toString(render, level) {
+import TreeNodeRenderer from './TreeNodeRenderer';
+
+export default class TreeUpdatedNode extends TreeNodeRenderer {
+  toString(level) {
     return [
-      `${this.getNewKey(level, '+')}: ${render.stringify(this.updatedNode.newValue, level + 1)}`,
-      `${this.getNewKey(level, '-')}: ${render.stringify(this.updatedNode.oldValue, level + 1)}`,
+      `${this.getNewKey(level, '+')}: ${this.stringify(this.node.newValue, level + 1)}`,
+      `${this.getNewKey(level, '-')}: ${this.stringify(this.node.oldValue, level + 1)}`,
     ];
-  }
-  getNewKey(level, mode) {
-    return `${' '.repeat(level * 4)}  ${mode} ${this.updatedNode.key}`;
   }
 }

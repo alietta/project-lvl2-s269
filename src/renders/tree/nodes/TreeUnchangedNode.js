@@ -1,11 +1,7 @@
-export default class TreeUnchangedNode {
-  constructor(unchangedNode) {
-    this.unchangedNode = unchangedNode;
-  }
-  toString(render, level) {
-    return `${this.getNewKey(level)}: ${render.stringify(this.unchangedNode.oldValue, level + 1)}`;
-  }
-  getNewKey(level) {
-    return `${' '.repeat(level * 4)}    ${this.unchangedNode.key}`;
+import TreeNodeRenderer from './TreeNodeRenderer';
+
+export default class TreeUnchangedNode extends TreeNodeRenderer {
+  toString(level) {
+    return `${this.getNewKey(level)}: ${this.stringify(this.node.oldValue, level + 1)}`;
   }
 }

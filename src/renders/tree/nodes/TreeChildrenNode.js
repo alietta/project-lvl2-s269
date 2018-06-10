@@ -1,11 +1,7 @@
-export default class TreeChildrenNode {
-  constructor(childrenNode) {
-    this.childrenNode = childrenNode;
-  }
-  toString(render, level) {
-    return `${this.getNewKey(level)}: ${render.render(this.childrenNode.children, level + 1)}`;
-  }
-  getNewKey(level) {
-    return `${' '.repeat(level * 4)}    ${this.childrenNode.key}`;
+import TreeNodeRenderer from './TreeNodeRenderer';
+
+export default class TreeChildrenNode extends TreeNodeRenderer {
+  toString(level, render) {
+    return `${this.getNewKey(level)}: ${render(this.node.children, level + 1)}`;
   }
 }

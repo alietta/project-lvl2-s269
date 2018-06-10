@@ -1,11 +1,7 @@
-export default class TreeDeletedNode {
-  constructor(deletedNode) {
-    this.deletedNode = deletedNode;
-  }
-  toString(render, level) {
-    return `${this.getNewKey(level)}: ${render.stringify(this.deletedNode.oldValue, level + 1)}`;
-  }
-  getNewKey(level) {
-    return `${' '.repeat(level * 4)}  - ${this.deletedNode.key}`;
+import TreeNodeRenderer from './TreeNodeRenderer';
+
+export default class TreeDeletedNode extends TreeNodeRenderer {
+  toString(level) {
+    return `${this.getNewKey(level, '-')}: ${this.stringify(this.node.oldValue, level + 1)}`;
   }
 }
